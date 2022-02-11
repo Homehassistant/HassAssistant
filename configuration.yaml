@@ -1,0 +1,80 @@
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+  recorder:
+  db_url: mysql://homeassistant:password@core-mariadb/homeassistant?charset=utf8mb4
+
+  # Example configuration.yaml entry
+feedreader:
+  urls:
+    - https://www.home-assistant.io/atom.xml
+    - https://github.com/blog.atom
+    - https://hasspodcast.io/feed/podcast
+    cache: true
+    cache_dir: /tmp/tts
+    time_memory: 300
+    base_url: https://192.168.178.3:8123/auth/authorize?response_type=code&redirect_uri=https%3A%2F%2F192.168.178.3%3A8123%2F%3Fauth_callback%3D1&client_id=https%3A%2F%2F192.168.178.3%3A8123%2F&state=eyJoYXNzVXJsIjoiaHR0cHM6Ly8xOTIuMTY4LjE3OC4zOjgxMjMiLCJjbGllbnRJZCI6Imh0dHBzOi8vMTkyLjE2OC4xNzguMzo4MTIzLyJ9
+    service_name: google_say
+
+homeassistant:
+  name: Hass Assistant
+  latitude: 51.201780798035124 
+  longitude: 6.7758112981985725
+  elevation: 
+  unit_system: metric
+  currency: EUR
+  time_zone: Amsterdam/Berlin
+  external_url: https://www.frariko.de
+  internal_url: https://ugb95szorf3k5nor6hh3phpwx7euffqb.ui.nabu.casa:8123
+media_dirs:
+media: "/media"
+recordings: "/mnt/recordings""
+
+
+# diverses
+legacy_templates: false
+cloud:
+  conf
+mobile_app:
+discovery:
+ios:
+airplay:
+
+
+#sensoren
+  binary_sensor:
+  - platform: group
+      name: 
+      device_class: opening
+      entities:z
+        - binary_sensor.door_left_contact
+        - binary_sensor.door_right_contact
+
+
+
+
+#nkkhkjh
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+recorder:
+
+  # OpenAirquality
+sensor:
+  - platform: waqi
+    token:   788cc7c0683c4b6f4001c9d877e05bc9798483aa 
+    locations: Duesseldorf
+http:
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 127.0.0.1
+    - 172.16.0.0/12
+    - 192.168.178.3
+    - ::1
+
+  ssl_certificate: /ssl/fullchain.pem
+  ssl_key: /ssl/privkey.pem
+
+    # Example base configuration.yaml entry
+  conversation: "hallo"
